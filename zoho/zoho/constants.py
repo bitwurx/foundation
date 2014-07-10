@@ -8,7 +8,7 @@ Foundation CRM to Zoho CRM migration module
 
 # zoho api
 ZOHO_API_USER = "jared.p@heritageps.net"
-ZOHO_API_PASS = "Summoner1!"
+ZOHO_API_PASS = "<api_pass>"
 ZOHO_API_AUTH_URI = \
 	"https://accounts.zoho.com/apiauthtoken/nb/create?SCOPE=ZohoCRM/crmap"
 ZOHO_CRM_API_URI = "https://crm.zoho.com/crm/private/xml"
@@ -17,4 +17,4 @@ ZOHO_CRM_SCOPE = "crmapi"
 # database
 DB_NAME = "crm"
 DB_USER = "jared"
-DB_PASS = "9tailz"
+DB_PASS = "<db_pass>"
