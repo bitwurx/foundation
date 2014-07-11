@@ -14,7 +14,7 @@ SELECT
 FROM 
 	companies_company 
 LIMIT 
-	10
+	1
 
 """
 
@@ -22,13 +22,25 @@ SELECT_NOTES = \
 """
 
 SELECT 
-	n.text, n.id
+	n.text, n.id, n.user_id
 FROM 
 	notes_note AS n INNER JOIN companies_company AS c 
 ON 
 	n.company_id = c.id 
 WHERE 
 	c.id = (%s)
+
+"""
+
+SELECT_USER = \
+"""
+
+SELECT
+	username 
+FROM 
+	auth_user 
+WHERE 
+	id = (%s)
 
 """
 

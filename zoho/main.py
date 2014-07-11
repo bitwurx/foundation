@@ -11,7 +11,7 @@ Foundation CRM to Zoho CRM migration module
 	
 # user-defined
 from zoho import sql
-from zoho.core import insert_leads, insert_notes, get_company_notes
+from zoho.core import insert_leads, insert_notes, get_company_notes, get_zoho_users, get_zoho_user
 from zoho.database import db, cursor
 
 if __name__ == "__main__":

@@ -8,6 +8,7 @@ Foundation CRM to Zoho CRM migration module
 
 # stdlib
 import re
+import json
 import urllib
 import urllib2
 
@@ -27,18 +28,6 @@ def get_auth_token():
 	return re.search(r"(?m)^AUTHTOKEN=(\w+)$", body).group(1)
 
 
-def parse_empty_notes(notes):
-	"""Parse notes containing no text"""
-
-	if len(notes) > 0:
-		filtered = []
-		for note_text, note_id in notes:
-			# filter out notes with blank values
-			if not re.match(r"^\"\s+\"$", note_text):
-				filtered.append(note_text)
-	return tuple(filtered)
-
-
 def get_cols(table):
 	"""Get the columns of the specified table"""
 
@@ -56,6 +45,18 @@ def fetch_with_cols(values, table):
 	return result
 
 
+def parse_empty_notes(notes):
+	"""Parse notes containing no text"""
+
+	if len(notes) > 0:
+		filtered = []
+		for note_text, note_id, user in notes:
+			# filter out notes with blank values
+			if not re.match(r"^\"\s+\"$", note_text):
+				filtered.append((note_text, user))
+	return tuple(filtered)
+
+
 def get_company_notes(cid):
 	"""Get the notes for company matching the provided ID"""
 
@@ -69,7 +70,9 @@ def get_lead_ids(response):
 	"""Parse zoho xml response for lead id strings"""
 
 	zoho_id_pattern = r'<FL val="Id">(\d{19})</FL>'
-	return  re.findall(zoho_id_pattern, response)
+	print response 
+	print re.findall(zoho_id_pattern, response)
+	return re.findall(zoho_id_pattern, response)
 
 
 def lead_id_dict(companies, ids):
@@ -80,6 +83,30 @@ def lead_id_dict(companies, ids):
 		company = fetch_with_cols(company, "companies_company")
 		id_map[(company["name"], company["id"])] = ids[i]
 	return id_map
+
+
+def get_zoho_users():
+	"""Get the users from ZOHO crm"""
+
+	params = {
+		"authtoken": ZOHO_AUTH_TOKEN,
+		"newFormat": 1,
+		"scope": ZOHO_CRM_SCOPE,
+		"type": "AllUsers"
+	}
+	url = "{}/{}/getUsers".format(ZOHO_CRM_API_USERS_URI, "Users")
+	data = urllib.urlencode(params)
+	request = urllib2.Request(url, data)
+	response = urllib2.urlopen(request)
+
+	return json.loads(response.read())["users"]["user"]
+
+
+def get_zoho_user(username):
+	"""Get the ZOHO id of the provided username"""
+
+	users = get_zoho_users()
+	return [user for user in users if user["email"] == username][0]
 
 
 def company_to_xml(company, row):
@@ -100,7 +127,6 @@ def company_to_xml(company, row):
 		phone=company.get("phone"),
 		fax=company.get("fax"),
 		website=company.get("website"),
-		industry=company.get("industry"),
 		employees=company.get("employee_count"),
 		street=company.get("street"),
 		city=company.get("city"),
@@ -112,11 +138,20 @@ def company_to_xml(company, row):
 def note_to_xml(note, row, lead_id):
 	"""Format note data to xml"""
 
+	content = note[0]
+	user_id = note[1]
+	# get the note user
+	cursor.execute(sql.SELECT_USER, (user_id,))
+	user = get_zoho_user(cursor.fetchone()[0])
+	print user
+
 	return xml.INSERT_NOTE.format(
 		row=row,
 		id=lead_id,
-		content=note
+		content=content,
+		user_id=user["id"]
 	)
+
 
 def _insert(scope, xml_data):
 	"""insert records into provided ZOHO scope"""
@@ -162,8 +197,9 @@ def insert_leads(companies):
 	# append closing xml tag
 	xml_data += "\n</Leads>"
 
-	return lead_id_dict(
-		companies, get_lead_ids(_insert("Leads", xml_data)))
+	response = _insert("Leads", xml_data)
+	lead_ids = get_lead_ids(response)
+	return lead_id_dict(companies, lead_ids)
 
 
 def insert_notes(notes, lead_id):

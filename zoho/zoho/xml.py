@@ -17,7 +17,6 @@ INSERT_LEAD = """
 	<FL val="Phone">{phone}</FL>
 	<FL val="Fax">{fax}</FL>
 	<FL val="Website">{website}</FL>
-	<FL val="Industry">{industry}</FL>
 	<FL val="No of Employees">{employees}</FL>
 	<FL val="Street">{street}</FL>
 	<FL val="City">{city}</FL>
@@ -28,7 +27,8 @@ INSERT_LEAD = """
 
 INSERT_NOTE = """
 <row no="{row}">
-	<FL val="entityID">{id}</FL>
-	<FL val="Note Title">None</FL>
+	<FL val="entityId">{id}</FL>
+	<FL val="Note Title"> </FL>
 	<FL val="Note Content">{content}</FL>
+	<FL val="SMOWNERID">{user_id}</FL>
 </row>"""
