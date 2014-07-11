@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<section id="home">
+	<div class="lock">
+		{% if list %}
+			{% if teams %}
+				<div id="list-options">
+					<div class="modifiers">
+						<select id="team-select">
+							{% for team in teams %}
+								<option id="{{ team.user.id }}">{{ team.user.first_name|title }} {{ team.user.last_name|title }}</option>
+							{% endfor %}
+						</select>
+						<select id="origin-select">
+							<option data-type="L">Leads</option>
+							<option data-type="C">Cold Calls</option>
+					 		<option data-type="R">Referrals</option>
+						</select>	
+					</div>
+					<button data-action="remove" class="disabled move">Remove</button>
+					<button data-action="archive" class="disabled move">Archive</button>
+					<button class="search-toggle"></button>
+					<div id="pagination">
+						<p class="count"><span class="range"></span> of <span class="total"></span></p>
+						<button class="prev">prev</button>
+						<button class="next">Next</button>
+						<select class="per-page">
+							<option>30</option>
+							<option>60</option>
+							<option>90</option>
+						</select>
+					</div>
+				</div>
+			{% endif %}
+
+			<div id="find">
+				<!-- search field -->
+				<input id="search" type="text" name="query" placeholder="Search" />
+				<ul id="letter-filter">
+					{% for i in 'abcdefghijklmnopqrstuvwxyz' %}
+						<li><p>{{ i }}</p></li>
+					{% endfor %}
+				</ul>
+				<div class="filters">
+					<select id="list-filters">
+				 		<option data-field="name">Company Name</option>
+				 		<option data-field="zipcode">Zip Code</option>
+				 		<option data-field="city">City</option>
+				 		<option data-field="contact">Contact Name</option>
+				 		<option data-field="phone">Phone Number</option>
+					</select> 
+					<span class="next-arrow">&#8594;</span>
+					<input class="tags" type="text" placeholder="Tags..." />
+				</div>
+			</div>
+
+			<div id="fields">
+				<ul>
+					{% for field in fields %}
+						<li data-map="{{ field.relation }}" class="{{ field.class_name }}">
+							<p></p><span class="field-filter">&#9660;</span>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+	</div>
+	<div class="content-body">
+		{% if list %}
+			<div id="lists"></div>
+			<article id="events">
+				<button class="close">hide</button>
+				<h1>Events</h1>
+			</article>
+		{% endif %}
+		{% if company %}
+			<div id="company"></div>
+		{% endif %}
+		{% block wrap %}{% endblock %}
+	</div>
+</section>
+{% endblock %}

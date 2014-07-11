@@ -1,0 +1,74 @@
+/*******************************************************************************
+|	Date Picker
+*******************************************************************************/
+
+div#ui-datepicker-div {
+	z-index: 4;
+	position: relative;
+	padding: 10px;
+	width: 275px;
+	background: white;
+	font-size: 14px;
+	border: 1px solid #ccc;
+
+	a {
+		@include reset-link;
+		color: $hps-blue;
+	}
+
+	td {
+		padding: 5px;
+		cursor: pointer;
+	}
+
+	th { font-weight: normal; }
+
+	div.ui-datepicker-title {
+		margin-bottom: 10px;
+		text-align: center;
+		font-weight: bold;
+	}
+
+	div.ui-datepicker-header {
+		background: none;
+		border: none;
+	}
+
+	tbody {
+		a.ui-state-default {
+			background: none;
+			border: none;
+		}
+
+		a.ui-state-hover {
+			background: $hps-blue;
+			border: none;
+			color: white;
+		}
+	}
+
+	a.ui-corner-all {
+		cursor: pointer;
+		color: white;
+		&:hover {
+			font-weight: bold;
+			background: white;
+			border-color: white;
+		}
+	}
+	a.ui-datepicker-next {
+		text-align: right;
+		&:after {
+			z-index: 20;
+			position: relative;
+			content: ">>";
+			color: $hps-blue;
+		}
+	}
+	a.ui-datepicker-prev {
+		&:after {
+			content: "<<";
+			color: $hps-blue;
+		}
+	}
+}

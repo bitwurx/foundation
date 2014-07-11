@@ -1,0 +1,52 @@
+@import '_base';         /* base config */
+@import '_header';       /* site header */
+@import '_actions';      /* side panel "actions" bar */
+@import '_home';         /* home page */
+@import '_content';      /* home page content wrapper */
+@import '_list-table';   /* lists table (active, follow-up, etc.) */
+@import '_company';      /* company template */
+@import '_add-form';     /* add business page */
+@import '_popup';        /* alerts and associated widgets(pop-up/overlay) */
+@import '_date-picker';  /* jQuery UI Datepicker */
+@import '_events';       /* events slider */
+@import '_batch';        /* batch page */
+
+/*******************************************************************************
+|	Global
+*******************************************************************************/
+
+html, body { height: 100%; width: 100%;}
+
+body {
+	margin: auto;
+	padding: 0;
+	min-width: $site-width;
+	font-family: arial, tahoma, sans-serif;
+	font-size: 16px;
+	color: #444;
+
+	input, select, textarea, button {
+		@include border-radius(3px);
+	}
+}
+
+a.back-home {
+	@include reset-link;
+	&:hover { span { color: $hps-blue; } }
+}
+
+p.form-response {
+	margin: 0 0 10px 0;
+	padding: 7px 10px;
+	color: #444;
+}
+
+p.form-response.success {
+	background: white;
+	border: 1px solid darken($app-green, 3%);
+}
+
+p.form-response.failed {
+	background: white;;
+	border: 1px solid darken(red, 3%);
+}

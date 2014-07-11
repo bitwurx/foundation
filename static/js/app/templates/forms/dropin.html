@@ -1,0 +1,66 @@
+<script id="drop-in-form" type="text/template">
+	<span class="close">x</span>
+	<h1 class="event-type">Drop-In</h1>
+	<form id="appt-form" action="" method="post">
+		<!-- Company Field -->
+		<input type="hidden" name="company" value="<%= company.get('id') %>" />
+
+		<!-- Type Field (hidden) -->
+		<input type="hidden" id="form-type" name="event_type" value="Drop-In" />
+
+		<!-- Heading Field (canned gcal heading) -->
+		<input type="text" class="heading" name="heading" disabled="disabled" value="<%= heading.toProperCase() %>" />
+
+		<fieldset class="dt">
+			<!-- From Date Field -->
+			<label>From:</label>
+			<input type="text" class="date" name="start-date" placeholder="Select date" data-req="true" />
+
+			<!-- From Time Field -->
+			<select class="time" name="start-time" data-req="true"></select>
+
+			<!-- To Date Field -->
+			<label>To:</label>
+			<input type="text"class="date" name="end-date" placeholder="Select date" data-req="true" />
+
+			<!-- To Time Field -->
+			<select class="time" name="end-time" data-req="true"></select>
+		</fieldset>
+
+		<fieldset class="info">
+			<!-- Where Field -->
+			<label>Where:</label>
+			<input type="text" id="where" class="where" name="where" disabled="disabled" value="<%= where %>" />
+
+			<!-- Calendar Field -->
+			<label>Calendar:</label>
+			<select id="calendar" name="calendar">
+				<% _.each(calendars, function(calendar) { %>
+					<option data-id="<%= calendar.get('id') %>"><%= calendar.get('name') %></option>
+				<% }); %>
+			</select>
+			
+			<!-- Event Color Selector -->
+			<label>Event Color:</label>
+			<div id="g-colors">
+				<ul>
+					<% _.each(colors, function(color) { %>
+						<li><p class="g-color gc-<%= color.get('name') %>"></p></li>
+					<% }); %>
+				</ul>
+			</div>
+		</fieldset>
+
+		<!--- Description Field -->
+		<p class="description">
+			<label>Description:</label>
+			<textarea id="description" name="description"></textarea>
+		</p>
+
+		<!-- Calendar Color Field (hidden) -->
+		<input type="hidden" id="cal-color" name="color" />
+
+		<!-- Submit Button -->
+		<input type="submit" id="add-event" name="add-event" value="add event" />
+	</form>
+</script>

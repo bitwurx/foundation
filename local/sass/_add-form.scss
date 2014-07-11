@@ -1,0 +1,100 @@
+/*******************************************************************************
+|	Add Form Styles
+*******************************************************************************/
+
+div#add {
+	div.legend { margin: 10px 0; }
+	margin-bottom: 50px;
+}
+
+div#business {
+	width: 650px;
+
+	h1 {
+		margin: 10px 0;
+		font-weight: 300;
+	}
+
+	h2 {
+		margin: 10px 10px;
+		padding-bottom: 5px;
+		border-bottom: 1px solid #ddd;
+		font-weight: 300;
+	}
+
+	select#team {
+		padding: 5px;
+		background: white;
+		border: 1px solid #ddd;
+		border-bottom: 2px solid #ccc;
+	}
+
+	form#business-form div#form-wrap {
+		@include form-decorators;
+		overflow: hidden;
+		padding: 10px 10px 15px 10px;
+		background: #f3f3f3;
+		border: 1px solid #ccc;
+
+		fieldset {
+			margin: 0;
+			padding: 0;
+			width: 600px;
+			border: none;
+		}
+
+		p {
+			margin: 5px 0;
+			padding: 5px 10px;
+		}
+
+		label {
+			display: block;
+			margin: 5px 0;
+		}
+
+		textarea {
+			display: block;
+			margin-bottom: 5px;
+			width: 600px;
+			border: 1px solid #ddd;
+			border-bottom: 2px solid #d3d3d3;
+			outline-color: lighten(#016fb5, 10%);
+		}
+
+		input,select {
+			margin: 0;
+			padding: 5px;
+			font-size: 18px;
+		}
+
+		input[type=text], 
+		input[type=email], 
+		input[type=url] {
+			width: 595px;
+			font-weight: 300;
+			border: 1px solid #ddd;
+			border-bottom: 2px solid #d3d3d3;
+			outline-color: lighten(#016fb5, 10%);
+		}
+
+		select {
+			width: 607px;
+			background: white;
+			border: 1px solid #ddd;
+			border-bottom: 2px solid #d3d3d3;
+			outline-color: lighten(#016fb5, 10%);
+		}
+
+		button[type=submit] {
+			margin: 10px 0 0 10px;
+			padding: 10px;
+			background: #016fb5;
+			font-size: 15px;
+			color: white;
+			border: 1px solid #016fb5;
+			cursor: pointer;
+			&:hover { background: darken(#016fb5, 5%); }
+		}
+	}
+}

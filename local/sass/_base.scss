@@ -1,0 +1,59 @@
+@import 'compass/css3/box-sizing';
+@import 'compass/css3/border-radius';
+@import 'compass/css3/images';
+@import url(http://fonts.googleapis.com/css?family=Poiret+One);
+
+$site-width: 1200px;
+$filter-width-buffer: 200px;
+$hps-blue: #0d6faf;
+$app-orange: #d87500;
+$app-green: #8ed800;
+$app-blue: #00b2d8;
+$list-table-padding: 0 0 0 0;
+
+@mixin reset-link {
+	text-decoration: none;
+	color: inherit;
+}
+
+@mixin clear {
+	&:after {
+		content: ".";
+	    display: block;
+	    clear: both;
+	    visibility: hidden;
+	    line-height: 0;
+    	height: 0;
+	}
+}
+
+@mixin form-decorators {
+	input[type=text].failed, 
+	input[type=password].failed,
+	input[type=email].failed,
+	input[type=url].failed,
+	select.failed, 
+	textarea.failed { border: 1px solid red !important; }
+	.required,
+	small.FormError { color: red !important; }
+}
+
+@mixin round-header($radius) {
+	border-collapse: separate;
+	tr.head:first-child td:first-child { border-top-left-radius: $radius; }
+	tr.head:first-child td:last-child { border-top-right-radius: $radius; }
+}
+
+// color calendar colors
+p.gc-default    { background: #cabdbf; }
+p.gc-bold-blue  { background: #5484ed; }
+p.gc-blue       { background: #a4bdfc; }
+p.gc-turquoise  { background: #46d6db; }
+p.gc-green      { background: #7ae7bf; }
+p.gc-bold-green { background: #51b749; }
+p.gc-yellow     { background: #fbd75b; }
+p.gc-orange     { background: #ffb878; }
+p.gc-red        { background: #ff887c; }
+p.gc-bold-red   { background: #dc2127; }
+p.gc-purple     { background: #dbadff; }
+p.gc-gray       { background: #e1e1e1; }

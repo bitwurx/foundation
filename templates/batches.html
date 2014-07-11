@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+
+{% block wrap %}
+<div id="batch">
+	{% if messages %}
+		{% for message in messages %}
+			<p class="form-response success">{{ message }}</p>
+		{% endfor %}
+	{% endif %}
+
+	<form id="import-list" enctype="multipart/form-data"action="" method="post">{% csrf_token %}
+		<select class="batch-team-select" name="user">
+			<option>Select Team</option>
+			{% for team in teams %}
+				<option data-id="{{ team.id }}">{{ team }}</option>
+			{% endfor %}
+		</select>
+		<div class="file">
+			<input id="browse" type="button" value="Browse" />
+			<p class="filename">Select File</p>
+			{{ form.file }}
+			<p class="error"></p>
+		</div>
+	{% if batches %}
+		<h2>History</h2>
+		<table id="batch-history">
+			<thead>
+				<tr>
+					<td>Batch Time</td>
+					<td>User</td>
+					<td>Team</td>
+					<td>Entries Count</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for batch in batches %}
+					<tr>
+						<td>{{ batch.timestamp }}</td>
+						<td>{{ batch.user.first_name }} {{ batch.user.last_name }}</td>
+						<td>{{ batch.team }}</td>
+						<td>{{ batch.quantity }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>		
+	{% endif %}
+</div>
+{% endblock %}

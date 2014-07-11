@@ -1,0 +1,86 @@
+<script id="active-list" type="text/template">
+	<% if (companies.length > 0) { $('div#fields').show(); %>
+		<table id="active-list" class="list" width=100%>
+			<tbody>
+				<% _.each(companies, function(company) { %>
+					<tr id="<%= company.get('id') %>" class="biz">
+						<td class="<%= $th.classFields[0] %>">
+							<div class="td-wrap">
+								<div class="select-biz"><input type="checkbox" /></div>
+								<a href="/company/<%= company.get('id') %>" class="details"><%= company.get('name').toProperCase() %></a>
+							</div>
+						</td>
+						<td class="<%= $th.classFields[1] %>">
+							<div class="td-wrap">
+								<p><%= $th.get(company, 'phone') %></p>
+								<% if (company.get('call_access_level') == 2) { %>
+									<span class="level strict" data-bttc="<% company.get('best_time_to_call') %>"></span>
+								<% } else if (company.get('call_access_level') == 1) { %>
+									<span class="level limited" data-bttc="<% company.get('best_time_to_call') %>"></span>
+								<% } else if (company.get('call_access_level') == 0) { %> 
+									<span class="level open"></span>
+								<% } %>
+							</div>
+						</td>
+						<td class="<%= $th.classFields[2] %>">
+							<%= $th.get(company, 'first_name').toProperCase() %>     <!-- first name -->
+							<% if ($th.get(company, 'last_name')) { %>
+								<%= $th.get(company, 'last_name').toProperCase() %>  <!-- last name -->
+							<% }; %>
+						</td>
+						<td class="<%= $th.classFields[3] %>"><%= $th.get(company, 'area') %></td>
+						<td class="<%= $th.classFields[4] %>"><%= $th.get(company, 'last_update') %></td>
+					</tr>
+					<tr class="biz-info">
+						<td class="expand" colspan=<%= fieldsLength %>>
+							<div class="slider">
+								<div class="options">
+								  <ul>
+								  	<li class="call-biz">
+								  		<a href="#" data-phone-no="<%= company.get('phone') %>" class="call-biz">
+								  			<img src="/static/img/phone-icon.png" />Call Company</a>
+								  	</li>
+								  	<% if ($th.getEvents(company).length > 0) { %>
+									  	<li>
+									  		<button data-name="<%= company.get('name') %>" data-co="<%= company.get('id') %>" class="view-events">View Events</button>
+									  	</li>
+								  	<% } %>
+								  </ul>
+								</div>
+								<div class="info">
+									<% if (company.get('comments')) { %>
+										<h3>AE Comments:</h3>
+										<textarea disabled="disabled"><%= company.get('comments') %></textarea>
+									<% } %>
+									<h3>Notes:</h3>
+									<ul class="notes">
+										<% _.each($th.getNotes(company), function(note) { %>
+											<li class="note">
+												<p class="text"><%= note.get('text') %></p>
+												<p class="user"><%= note.get('timestamp') %> -- <%= note.get('firstName') %> <%= note.get('lastName') %></p>
+											</li>
+										<% }); %>
+										<li>
+											<form action="" method="post" class="biz-data">
+												<input type="hidden" name="company_id" value="<%= company.get('id') %>">
+												<input type="hidden" name="user_id" value="<%= company.get('user') %>">
+												<input type="text" class="note-text" name="text" placeholder="Add Note" data-req="true"/>
+												<input type="submit" class="add-note" name="add-note" value="Add" />
+											</form>
+										</li>
+									</ul>
+									<h3 class="fup">Follow Up:</h3>
+									<button data-biz="<%= company.get('id') %>" id="appt" class="fupbtn">Appointment</button>
+									<button data-biz="<%= company.get('id') %>" id="drop" class="fupbtn">Drop-In</button>
+									<button data-biz="<%= company.get('id') %>" id="cb" class="fupbtn">Callback</button>
+								</div>
+							</div>
+						</td>
+					</tr>
+				<% }); %>
+			</tbody>
+		</table>
+	<% } else { $('div#fields').hide(); %>
+		<p class="empty"><%= $('#list-options select :selected').html() %> - No Records Found</p>
+	<% } %>
+</script>

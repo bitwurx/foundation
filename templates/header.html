@@ -1,0 +1,18 @@
+<header id="main">
+	<h1><a href="/">Foundation</a></h1>
+	<div id="user">
+		{% if user.is_authenticated %}
+			<p>Welcome, 
+				{% if user.is_superuser %}
+					<a href="/admin">{{ user.first_name|title }}</a> 
+				{% else %}
+					{{ user.first_name|title }}
+				{% endif %}
+				<span class="divider"> | </span>
+			</p>
+			<a class="logout" href="{% url 'logout' %}">logout</a>
+		{% else %}
+			<a class="login" href="{% url 'goauth2' %}">Login</a>
+		{% endif %}
+	</div>
+</header>

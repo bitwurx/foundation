@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE-Edge">
+	<meta charset="utf-8">
+	<title>Foundation CRM</title>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/datepicker.css">
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
+	<script src="{{ STATIC_URL }}js/modernizr.js"></script>
+</head>
+<body>
+	{% include 'popup.html' %}
+	{% include 'header.html' %}
+	{% include 'sidenav.html' %}
+	{% if not user.is_staff %}
+		<script type="text/javascript">
+			if (window.location.pathname != '/add/')
+				window.location = '/add/'
+		</script>
+	{% endif %}
+	<div id="content">{% block content %}{% endblock %}</div>
+	{% include 'footer.html' %}
+	<script type="text/javascript">var currentUser = {{ user.id }};</script>
+	<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0r-k0ctOXJn_j0YcF5GcUOHSvaV2agF4&sensor=false">
+    </script>
+	<script data-main="{{ STATIC_URL }}js/main.js" src="{{STATIC_URL}}js/jam/require.js"></script>
+</body>
+</html>

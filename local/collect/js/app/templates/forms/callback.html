@@ -1,0 +1,32 @@
+<script id="callback-form" type="text/template">
+	<span class="close">x</span>
+	<h1 class="event-type">Callback</h1>
+	<form id="cb-form" action="" method="post">
+		<!-- Company Field -->
+		<input type="hidden" name="company" value="<%= company.get('id') %>" />
+
+		<!-- Type Field (hidden) -->
+		<input type="hidden" name="type" value="call back" />
+
+		<!-- Heading Field (canned gcal heading) -->
+		<input type="text" class="heading" name="heading" disabled="disabled" value="<%= heading.toProperCase() %>" />
+
+		<fieldset class="dt">
+			<!-- Callback Date Field -->
+			<label>Scheduled:</label>
+			<input type="text" class="date" name="start-date" placeholder="Select date" data-req="true" />
+
+			<!-- Callback Time Field -->
+			<select class="time" name="start-time" data-req="true"></select>
+		</fieldset>
+
+		<!--- Description Field -->
+		<p class="description">
+			<label>comments:</label>
+			<textarea id="description" name="comments"></textarea>
+		</p>
+
+		<!-- Submit Button -->
+		<input type="submit" id="add-event" name="add-event" value="add task" />
+	</form>
+</script>

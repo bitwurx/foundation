@@ -1,0 +1,87 @@
+/*******************************************************************************
+|	Events Styles
+*******************************************************************************/
+
+article#events {
+	@include box-sizing(border-box);
+	z-index: 3;
+	position: fixed;
+	top: 0;
+	right: -40px;
+	padding: 90px 20px 20px 20px;
+	width: 0;
+	height: 100%;
+	background: #f6f6f6;
+	border-left: 1px solid #ddd;
+
+	div.body {
+		display: none;
+	}
+
+	button.close {
+		margin-bottom: 10px;
+		padding: 3px 5px;
+		background: $app-green;
+		border: 1px solid darken($app-green, 3%);
+		border-bottom: 2px solid darken($app-green, 7%);
+		color: white;
+	}
+
+	h1 {
+		margin: 0;
+	}
+
+	h2 {
+		padding: 5px 0;
+		font-weight: normal;
+		border-bottom: 1px solid #eee;
+	}
+
+	h3 {
+		margin: 2px 0;
+	}
+
+	p.event-header {
+		padding: 7px;
+		margin: 5px 0 0 0;
+		background: #ddd; 
+		cursor: pointer;
+		&:hover {
+			background: darken($app-green, 10%);
+			font-weight: bold;
+			color: white;
+		}
+	}
+
+	p.event-header.expanded {
+		font-weight: bold;
+		background: darken($app-green, 5%);
+		&:hover {
+			background: darken($app-green, 10%);
+			color: white;
+		}
+		color: white;
+	}
+
+	a {
+		@include reset-link;
+		color: $hps-blue;
+	}
+
+	div.event-detail {
+		display: none;
+		margin-bottom: 10px;
+		padding: 10px;
+		background: white;
+		border-bottom: 2px solid #ddd;
+
+		span { 
+			display: block;
+			margin: 2px 0; 
+		}
+
+		small {
+			color: $hps-blue;
+		}
+	}
+}

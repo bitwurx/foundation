@@ -1,0 +1,54 @@
+/*******************************************************************************
+|	Header
+*******************************************************************************/
+
+header#main {
+	@include box-sizing(border-box);
+	@include clear;
+	position: fixed;
+	top: 0;
+	z-index: 4;
+	padding: 15px 20px;
+	width: 100%;
+	background: $hps-blue;
+	border-bottom: 1px solid darken($hps-blue, 10%);
+	color: white;
+	
+	h1 {
+		display: inline; 
+		margin: 0;
+
+		a { @include reset-link; }
+	}
+
+	div#user {
+		float: right;
+
+		p { margin: 0; padding-top: 10px; float: Left; }
+
+		a { 
+			@include reset-link;  
+			&:hover { color: $app-blue; }
+		}
+
+		a.login {
+			@include reset-link;
+			display: block;
+			margin-top: 3px;
+			padding: 7px;
+			background: lighten($hps-blue, 5%);
+			border: none;
+			border-bottom: 1px solid darken($hps-blue, 10%);
+			outline: none;
+			&:hover { background: lighten($hps-blue, 10%); }
+		}
+
+		a.logout {
+			margin-top: 3px;
+			padding: 7px 5px;
+			float: left;
+		}
+
+		span.divider { color: lighten($hps-blue, 20%); }
+	}
+}

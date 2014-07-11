@@ -1,0 +1,34 @@
+/*******************************************************************************
+|	Manager
+*******************************************************************************/
+
+section#list-admin {
+	tr.heading { 
+		font-weight: bold; 
+
+		td { background: #eee; }
+	}
+
+	td { padding: 10px; }
+
+	form.list-fields {
+		input {
+			border: none;
+			outline: none;
+			background: none;
+		}
+
+		input[type=submit] {
+			display: none;
+			&:hover { background: lighten($hps-blue, 5%); }
+		}
+
+		tr.field-set {
+			&:hover {
+				background: $hps-blue;
+				
+				input { color: white; display: block; }
+			}
+		}
+	}	
+}

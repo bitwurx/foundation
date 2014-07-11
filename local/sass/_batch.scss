@@ -1,0 +1,75 @@
+/*******************************************************************************
+|	Batch Styles
+*******************************************************************************/
+
+div#batch {
+	width: $site-width;
+
+	form#import-list {
+		div.file {
+			display: inline-block;
+			margin: 0;
+			padding: 25px;
+			border: 1px solid #ddd;
+			border-bottom: 2px solid #ddd;
+		}
+
+		input[type=file] { display: none; }
+
+		input#browse {
+			@include border-radius(0);
+			float: left;
+			margin: 0;
+			padding: 7px 10px;
+			background: $hps-blue;
+			border: none;
+			color: white;
+			&:hover {
+				background: lighten($hps-blue, 5%);
+			}
+		}
+
+		p.filename {
+			float: left;
+			margin: 0;
+			padding: 5px;
+			width: 250px;
+			font-size: 18px;
+			border: 1px solid #eee;
+			color: #aaa;
+		}
+		p.filename.hasValue {
+			color: #444;
+		}
+
+		p.error {
+			clear: both;
+			margin: 0;
+			padding: 5px 0;
+			color: red;
+		}
+	}
+
+	select.batch-team-select {
+		display: block;
+		clear: both;
+		margin-bottom: 10px;
+		padding: 5px;
+		background: #eee;
+		border: 1px solid #ddd;
+	}
+
+	select.error { border: 1px solid red; }
+
+	h2 { margin-bottom: 7px; }
+
+	table#batch-history {
+		thead { background: #eee; }
+
+		td {
+			padding: 7px 10px;
+			border: 1px solid #ddd;
+		}
+	}
+}
+

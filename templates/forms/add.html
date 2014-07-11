@@ -1,0 +1,157 @@
+{% extends 'index.html' %}
+{% block wrap %}
+<div id="add">
+	<div id="business">
+		<h1>Add New Business</h1>
+
+		{% if messages %}
+			{% for message in messages %}
+				{% if message.level == 25 %}
+					<p class="form-response success">{{ message }}</p>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+
+		<form id="business-form" action="" method="post">{% csrf_token %}
+			{% if user.is_staff %}
+				<select id="team" name="team">
+					{% for team in teams %}
+						<option>{{ team }}</option>
+					{% endfor %}
+				</select>
+			{% endif %}
+
+			<div class="legend">
+				<small>DM = Decision Maker</small></br>
+				<small>AE = Account Executive</small>
+			</div>
+
+			<div id="form-wrap">
+				<fieldset>
+					<h2>Business Info:</h2>
+					<!-- Name Field -->
+					<p>
+						<label>{{ form.name.label }}: </label> 
+						{{ form.name }}
+					</p>
+
+					<!-- Address Field -->
+					<p>
+						<label>{{ form.address.label }}:</label> 
+						{{ form.address }}
+					</p>
+
+					<!-- Address 2 Field -->
+					<p>
+						<label>{{ form.address2.label }}:</label>
+						{{ form.address2 }}
+					</p>
+
+					<!-- City Field -->
+					<p>
+						<label>{{ form.city.label }}:</label> 
+						{{ form.city }}
+					</p>
+
+					<!-- State Field -->
+					<p>
+						<label>{{ form.state.label }}:</label>
+						{{ form.state }}
+						<small>(Abbreviated, ex. NC)</small>
+					</p>	
+
+					<!-- Zipcode Field -->
+					<p>
+						<label>{{ form.zipcode.label }}:</label>
+						{{ form.zipcode }}
+					</p>
+
+					<!-- Phone Field -->
+					<p>
+						<label>{{ form.phone.label }}:</label> 
+						{{ form.phone }}
+						<small>(XXX) XXX-XXXX</small>
+					</p>
+
+					<!-- Email Field -->
+					<p>
+						<label>{{ form.email.label }}:</label> 
+						{{ form.email }}
+					</p>
+
+					<!-- Website Field -->
+					<p>
+						<label>{{ form.website.label }}:</label> 
+						{{ form.website }}
+					</p>
+				</fieldset>
+				<fieldset>
+					<h2>Contact Info:</h2>
+
+					<!-- Decision Maker First Name Field -->
+					<p>
+						<label>DM {{ form.first_name.label }}:</label> 
+						{{ form.first_name }}
+					</p>
+
+					<!-- Decision Maker Last Name Field -->
+					<p>
+						<label>DM {{ form.last_name.label }}:</label> 
+						{{ form.last_name }}
+					</p>
+
+					<!-- DM Role Field -->
+					<p>
+						<label>DM {{ form.title.label }}:</label> 
+						{{ form.title }}
+					</p>
+
+					<!-- Contact First Name -->
+					<p>
+						<label>{{ form.contact_first_name.label }}:</label> 
+						{{ form.contact_first_name }}
+					</p>
+
+					<!-- Contact Last Name -->
+					<p>
+						<label>{{ form.contact_last_name.label }}:</label> 
+						{{ form.contact_last_name }}
+					</p>
+
+					<!-- Contact Title -->
+					<p>
+						<label>{{ form.contact_title.label }}:</label> 
+						{{ form.contact_title }}
+					</p>
+
+					<!-- Location Field -->
+					<p>
+						<label>{{ form.location.label }}:</label> 
+						{{ form.location }}
+					</p>
+
+					<!-- Best Time To Call Field -->
+					<p>
+						<label>{{ form.best_time_to_call.label }}:</label> 
+						{{ form.best_time_to_call }}
+					</p>
+
+					<!-- Comments Field -->
+					<p>
+						<label>{{ form.comments.label }}:</label> 
+						{{ form.comments }}
+					</p>
+				</fieldset>
+
+				<p>
+					<label>{{ form.origin.label }}: </label>
+					{{ form.origin }}
+				</p>
+
+				<button type="submit">Save</button>
+			</div>
+		</form>
+		{{ response }}
+	</div>
+</div>
+{% endblock %}

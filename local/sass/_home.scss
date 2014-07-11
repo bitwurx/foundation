@@ -1,0 +1,101 @@
+/*******************************************************************************
+|	Home
+*******************************************************************************/
+
+div.lock {
+	@include box-sizing(border-box);
+	display: none;
+	z-index: 1;
+	position: fixed;
+	top: 69px;
+	padding: 20px 20px 0 170px;
+	width: 100%;
+	min-width: $site-width;
+	background: white;
+}
+
+div.content-body {
+	@include box-sizing(border-box);
+	display: none;
+	padding-right: 20px;
+	margin-left: 170px;
+}
+
+section#home {
+	@include clear;
+	position: relative;
+
+	div#find { 
+		@include box-sizing(border-box);
+		display: none;
+		position: relative;
+		float: left; 
+		padding: 15px;
+		width: 100%;
+		border: 1px solid #eee;
+
+		input[type=text] { width: 800px; background: none;}
+
+		input#search {
+			float: left;
+			padding: 5px;
+			border: none;
+			border-bottom: 1px solid #ccc;
+			outline: none;
+		}
+
+		select {
+			padding: 5px;
+			background: #f3f3f3;
+			border: 1px solid #ddd;
+			border-bottom: 1px solid #ccc;
+			outline: none;
+			cursor: pointer;
+		}
+
+		input[type=submit] { 
+			margin-left: 10px;
+			border-bottom: 1px solid #ccc;
+			&:hover { 
+				background: $app-blue; 
+				border-bottom: 1px solid darken($app-blue, 3%);
+				color: white;
+			}
+		}
+
+		input[type=text].tags {
+			padding: 5px;
+			border: 1px solid #ddd;
+		}
+
+		span.next-arrow {
+			margin: 0 5px;
+		}
+	}
+
+	ul#letter-filter {
+		clear: both;
+		list-style: none;
+		margin: 0 0 10px 0;
+		padding: 0;
+
+		li {
+			display: inline;
+
+			p { 
+				display: inline-block;
+				margin: 5px 0;
+				padding: 5px 10px;
+				font-size: 14px;
+				cursor: pointer;
+				&:hover {background: #eee;}
+			}
+		}
+	}
+}
+
+div#list-options {
+	clear: both;
+	display: block;
+	width: 100%;
+}

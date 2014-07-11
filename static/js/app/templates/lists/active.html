@@ -1,0 +1,80 @@
+<script id="active-list" type="text/template">
+	<% if (companies.length > 0) { %>
+		<table id="active-list" class="list" width=100%>
+			<thead>
+				<tr class="head">
+					<% _.each($th.fields, function(field) { %>
+						<td><%= field %></td>
+					<% }); %>
+				</tr>
+			</thead>
+			<tbody>
+				<% _.each(companies, function(company) { %>
+					<tr id="<%= company.get('id') %>" class="biz">
+						<td class="<%= $th.classFields[0] %>">
+							<a href="/company/<%= company.get('id') %>" class="details">
+								<%= company.get('name').toProperCase() %></a>
+						</td>
+						<td class="<%= $th.classFields[1] %>"><%= $th.get(company, 'phone') %>
+							<% if ($th.get(company, 'best_time_to_call')) { %>
+								<span class="limit true" data-bttc="<% $th.get(company, "best_time_to_call") %>"></span>
+							<% } else { %>
+								<span class="limit false"></span>
+							<% }; %> 
+						</td>
+						<td class="<%= $th.classFields[2] %>">
+							<%= $th.get(company, 'first_name').toProperCase() %>     <!-- first name -->
+							<% if ($th.get(company, 'last_name')) { %>
+								<%= $th.get(company, 'last_name').toProperCase() %>  <!-- last name -->
+							<% }; %>
+						</td>
+						<td class="<%= $th.classFields[3] %>"><%= $th.get(company, 'area') %></td>
+						<td class="<%= $th.classFields[4] %>"><%= $th.get(company, 'last_update') %></td>
+					</tr>
+					<tr class="biz-info">
+						<td class="expand" colspan=<%= fields.length %>>
+							<div class="options">
+							  <ul>
+							  	<li>
+							  		<a href="#" data-phone-no="<%= company.get('phone') %>" class="call-biz">
+							  			<img src="/static/img/phone-icon.png" />Call Company</a>
+							  	</li>
+							  </ul>
+							</div>
+							<div class="info">
+								<h3>Notes:</h3>
+								<ul class="notes">
+									<% _.each($th.getNotes(company), function(note) { %>
+										<li class="note">
+											<p class="text"><%= note.get('text') %></p>
+											<p class="user"><%= note.get('timestamp') %> -- <%= note.get('firstName') %> <%= note.get('lastName') %></p>
+										</li>
+									<% }); %>
+									<li>
+										<form action="" method="post" class="biz-data">
+											<input type="hidden" name="company_id" value="<%= company.get('id') %>">
+											<input type="hidden" name="user_id" value="<%= company.get('user') %>">
+											<input type="text" class="note-text" name="text" placeholder="Add Note" data-req="true"/>
+											<input type="submit" class="add-note" name="add-note" value="Add" />
+										</form>
+									</li>
+								</ul>
+								<h3 class="fup">Follow Up:</h3>
+								<% _.each($th.getEvents(company), function(event) { %>
+									<p id="<%= event.get('id') %>" class="event">
+										<%= event.get('created_on') %> - <%= event.get('event_type') %> 
+										 [ <a href="/api/1.0/events/<%= event.get('id') %>">view event</a> ]
+									</p>
+								<% }); %>
+								<button data-biz="<%= company.get('id') %>" id="appt" class="fupbtn">Appointment</button>
+								<button data-biz="<%= company.get('id') %>" id="cb" class="fupbtn">Callback</button>
+							</div>
+						</td>
+					</tr>
+				<% }); %>
+			</tbody>
+		</table>
+	<% } else { %>
+		<p class="empty"><%= $('#list-options select :selected').html() %> - No Records Found</p>
+	<% } %>
+</script>

@@ -1,0 +1,26 @@
+<script id="events" type="text/template">
+	<div class="events-wrapper">
+		<div class="body">
+			<h2><%= company[0].toProperCase() %></h2>
+			<% _.each(events, function(event) { %>
+				<div class="event">
+					<p class="event-header">
+						<%= event.get('event_type').toProperCase() %>
+					</p>
+					<div class="event-detail">
+						<p>
+							<h3>Date -- <%= event.get('date') %></h3>
+							<% if (event.get('event_type') == 'appointment') { %>
+								<span>start: <%= event.get('_start') %></span>
+								<span>end:   <%= event.get('_end') %></span>
+							<% } else { %>
+								<span>callback: <%= event.get('_start') %></span>
+							<% }; %>
+							<small>created <%= event.get('created_on') %> -- <%= event.get('username') %></small>
+						</p>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+	</div>
+</script>

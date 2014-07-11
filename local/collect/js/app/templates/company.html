@@ -1,0 +1,126 @@
+<script id="company-template" type="text/template">
+	<button class="back">Return to list</button>
+	<div class="company-info">
+		<h1><%= $th.getProper(company, 'name') %></h1>
+		<form id="company-save-form">
+			<!-- google map -->
+			<div id="map-canvas"/><div id="map-trigger"/>
+
+			<h3>Location</h3>
+			<fieldset class="company-location">
+				<p>
+					<label>Name:</label>
+					<input type="text" name="name" value="<%= $th.getProper(company, 'name') %>" 
+						placeholder="Name"/>
+				</p>
+				<p>
+					<label>Address:</label>
+					<input type="text" name="address" value="<%= $th.getProper(company, 'address') %>" 
+						placeholder="Address"/>
+				</p>
+				<p>
+					<label>Address2:</label>
+					<input type="text" name="address2" value="<%= $th.getProper(company, 'address2') %>"
+						placeholder="Address 2" />
+				</p>
+				<p>
+					<label>City:</label>
+					<input type="text" name="city" value="<%= $th.getProper(company, 'city') %>" 
+						placholder="City" />
+				</p>
+				<p>
+					<label>State:</label>
+					<input type="text" name="state" value="<%= company.get('state').toUpperCase() %>"
+						placeholder="State" />
+				</p>
+				<p>
+					<label>Zipcode:</label>
+					<input type="text" name="zipcode" value="<%= $th.getProper(company, 'zipcode') %>" 
+						placeholder="Zip Code" />
+				</p>
+			</fieldset>
+
+			<h3>Contact</h3>
+			<fieldset class="company-contact">
+				<p class="owner">
+					<label><%= $th.getProper(company, 'title') || 'Owner' %>:</label>
+					<input type="text" name="first_name" value="<%= $th.getProper(company, 'first_name') %>"
+						placeholder="First Name" />
+					<input type="text" name="last_name" value="<%= $th.getProper(company, 'last_name') %>"
+						placeholder="Last Name" />
+				</p>
+				<p class="contact">
+					<label>Contact:</label>
+					<input type="text" name="contact_first_name" value="<%= $th.getProper(company, 'contact_first_name') %>" 
+						placeholder="First Name" />
+					<input type="text" name="contact_last_name" value="<%= $th.getProper(company, 'contact_last_name') %>" 
+						placeholder="Last Name" />
+					<input type="text" id="title" name="contact_title" value="<%= $th.getProper(company, 'contact_title') %>" 
+						placeholder="Title" />
+				</p>
+				<p>
+					<label>Title:</label>
+					<input type="text" name="contact" value="<%= $th.getProper(company, 'contact') %>" 
+						placeholder="Contact Title" />
+				</p>
+				<p>
+					<label>Phone:</label>
+					<input type="text" name="phone" value="<%= $th.getProper(company, 'phone') %>" 
+						placeholder="Phone Number" />
+				</p>
+				<p>
+					<label>Fax:</label>
+					<input type="text" name="fax" value="<%= $th.getProper(company, '') %>" 
+						placeholder="Fax Number" />
+				</p>
+				<p>
+					<label>Email:</label>
+					<input type="text" name="email" value="<%= company.get('email') %>" 
+						placeholder="Email Address" />
+				</p>
+				<p>
+					<label>Website:</label>
+					<input type="text" name="website" value="<%= company.get('website') %>"
+						placeholder="Website URL" />
+				</p>
+				<p>
+					<label>Availability:</label>
+					<input type="text" name="best_time_to_call" placeholder="Best Time To Call">
+				</p>
+			</fieldset>
+
+			<h3>Description</h3>
+			<fieldset class="company-description">
+				<p>
+					<label>Profile:</label>
+					<select class="company-profile" name="profile">
+						<% _.each(profiles, function(profile) { 
+						   if (profile.id == company.get('profile')) %>
+							<option data-id="<%= profile.get('id') %>" selected="selected"><%= profile.get('name') %></option>
+						<% else %>
+							<option data-id="<%= profile.get('id') %>"><%= profile.get('name') %></option>
+						<% 	}) %>
+					</select>
+				</p>
+				<p>
+					<label>Employees:</label>
+					<select name="employee_count">
+						<option>1-10</option>
+						<option>10-20</option>
+						<option>20-50</option>
+						<option>50-100</option>
+						<option>100-500</option>
+						<option>500-1000</option>
+						<option>1000+</option>
+					</select>
+				</p>
+				<p>
+					<label>Tags:</label>
+					<input type="text" name="tags" placeholder="Ex. Micro merchant, SMB">
+				</p>
+			</fieldset>
+
+			<input id="company-save" type="submit" name="save" value="save" />
+		</form>
+	</div>
+</script>

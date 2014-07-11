@@ -1,0 +1,29 @@
+/*******************************************************************************
+|	Actions Article
+*******************************************************************************/
+
+article#actions { 
+	@include clear;
+	z-index: 2;
+	position: fixed;
+	top: 69px;
+	padding: 20px 0 20px 20px;
+	width: 150px;
+
+	nav {
+		h3 { margin: 0; font-size: 16px;}
+
+		ul {
+			margin: 0;
+			padding: 5px 0 10px 0;
+			list-style: none;
+
+			li {
+				margin: 10px 0;
+				a { @include reset-link;
+					&:hover { color: lighten($app-blue, 3%); }
+				}
+			}
+		}
+	}
+}
