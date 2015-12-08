@@ -11,8 +11,8 @@ DOMAIN = 'heritageps.net'
 
 # Google Oauth2 parameters
 FLOW = OAuth2WebServerFlow(
-    client_id='797031806446-h7o17q5go5iv0uvokb83tc8tvna5hgar.apps.googleusercontent.com',
-    client_secret='oIRqo8duomj-D4kY5iTRR3pw',
+    client_id='',
+    client_secret='',
     scope=(
         'https://www.googleapis.com/auth/userinfo#email',
         'https://www.googleapis.com/auth/userinfo.profile',
